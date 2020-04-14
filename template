@@ -11,6 +11,7 @@ body:     //article
 
 title:    $body//h1[1]
 subtitle: $title/next-sibling::h2
+author: //span[has-class("author")]
 author_url: //span[has-class("author")]//@href
 
 # Get article cover image
@@ -19,9 +20,13 @@ cover: //img[has-class("wp-post-image")]
 # Convert all iframe elements to inline element
 @inline: $body//iframe[starts-with(@src, "/media/")]
 
-# Remote header and footer
+# Remove header and footer
 @remove: //article/header
 @remove: //article/footer
+@remove: //div[has-class("hustle-ui")]
+@remove: //div[has-class("cbxwpbkmarkwrap")]
+@remove: /html/head/meta[@property="article:published_time"]
+
 
 # Replace p to figure
 @replace_tag(<figure>): $body//p[.//img]
